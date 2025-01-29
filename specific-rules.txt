@@ -20,6 +20,9 @@ youtube.com###shelf-pyv-container
 youtube.com###video-masthead
 youtube.com###watch-buy-urls
 
+www.youtube.com##ytd-compact-promoted-video-*
+www.youtube.com###masthead-ad
+
 youtube.com##.ytp-ad-overlay-container
 youtube.com##.ytp-ad-player-overlay-flyout-cta
 youtube.com##.ytp-ad-progress
