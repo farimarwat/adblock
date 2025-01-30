@@ -1,13 +1,18 @@
-www.youtube.com##+js(json-prune-fetch-response, playerAds adPlacements adSlots no_ads playerResponse.playerAds playerResponse.adPlacements playerResponse.adSlots playerResponse.no_ads [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots [].playerResponse.no_ads, , propsToMatch, /\/(player|get_watch)\?/)
-www.youtube.com##+js(json-prune-fetch-response, playerAds adPlacements adSlots no_ads playerResponse.playerAds playerResponse.adPlacements playerResponse.adSlots playerResponse.no_ads, , propsToMatch, /playlist?)
-www.youtube.com##+js(json-prune-xhr-response, playerAds adPlacements adSlots no_ads playerResponse.playerAds playerResponse.adPlacements playerResponse.adSlots playerResponse.no_ads [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots [].playerResponse.no_ads, , propsToMatch, /\/player(?:\?.+)?$/)
-tv.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /playlist\?list=|\/player(?:\?.+)?$|watch\?[tv]=/)
-www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,/, , player?)
-www.youtube.com#@#+js(trusted-replace-fetch-response, /"adSlots.*?\}\}\]\,"adBreakHeartbeatParams/, "adBreakHeartbeatParams, player?)
-www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,/, , /playlist\?list=|\/player(?:\?.+)?$|watch\?[tv]=/)
-www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?("adSlots"|"adBreakHeartbeatParams")/gms, $1, /\/player(?:\?.+)?$/)
-www.youtube.com##+js(trusted-replace-fetch-response, '"adPlacements"', '"no_ads"', player?)
-www.youtube.com##+js(trusted-replace-fetch-response, '"adSlots"', '"no_ads"', player?)
+www.youtube.com#%#//scriptlet('json-prune-fetch-response', 'playerAds', 'adPlacements', 'adSlots', 'no_ads', 'playerResponse.playerAds', 'playerResponse.adPlacements', 'playerResponse.adSlots', 'playerResponse.no_ads', '/(player|get_watch)\?/')
+www.youtube.com#%#//scriptlet('json-prune-fetch-response', 'playerAds', 'adPlacements', 'adSlots', 'no_ads', 'playerResponse.playerAds', 'playerResponse.adPlacements', 'playerResponse.adSlots', 'playerResponse.no_ads', '/playlist?/')
+
+www.youtube.com#%#//scriptlet('json-prune-xhr-response', 'playerAds', 'adPlacements', 'adSlots', 'no_ads', 'playerResponse.playerAds', 'playerResponse.adPlacements', 'playerResponse.adSlots', 'playerResponse.no_ads', '/\/player(?:\?.+)?$/')
+tv.youtube.com#%#//scriptlet('trusted-replace-xhr-response', '"adPlacements"', '"no_ads"', '/playlist\\?list=|\/player(?:\?.+)?$|watch\\?[tv]=/')
+
+www.youtube.com#@#//scriptlet('trusted-replace-fetch-response', /"adPlacements.*?([A-Z]"\}|"\}{2,4})\}\]\,/, '', 'player?')
+www.youtube.com#@#//scriptlet('trusted-replace-fetch-response', /"adSlots.*?\}\}\]\,"adBreakHeartbeatParams/, '"adBreakHeartbeatParams', 'player?')
+
+www.youtube.com#%#//scriptlet('trusted-replace-xhr-response', /"adPlacements.*?([A-Z]"\}|"\}{2,4})\}\]\,/, '', '/playlist\\?list=|\/player(?:\?.+)?$|watch\\?[tv]=/')
+www.youtube.com#%#//scriptlet('trusted-replace-xhr-response', /"adPlacements.*?("adSlots"|"adBreakHeartbeatParams")/gms, '$1', '/\/player(?:\?.+)?$/')
+
+www.youtube.com#%#//scriptlet('trusted-replace-fetch-response', '"adPlacements"', '"no_ads"', 'player?')
+www.youtube.com#%#//scriptlet('trusted-replace-fetch-response', '"adSlots"', '"no_ads"', 'player?')
+
 ||www.youtube.com/playlist?list=$xhr,1p,replace=/"adPlacements"/"no_ads"/
 ||www.youtube.com/playlist?list=$xhr,1p,replace=/"adSlots"/"no_ads"/
 ||www.youtube.com/watch?$xhr,1p,replace=/"adPlacements"/"no_ads"/
@@ -16,4 +21,5 @@ www.youtube.com##+js(trusted-replace-fetch-response, '"adSlots"', '"no_ads"', pl
 ||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"adSlots"/"no_ads"/
 ||youtube.com/youtubei/v1/get_watch?$xhr,1p,replace=/"adPlacements"/"no_ads"/
 ||youtube.com/youtubei/v1/get_watch?$xhr,1p,replace=/"adSlots"/"no_ads"/
-www.youtube.com##+js(trusted-prevent-dom-bypass, Node.prototype.appendChild, fetch)
+
+www.youtube.com#%#//scriptlet('trusted-prevent-dom-bypass', 'Node.prototype.appendChild', 'fetch')
