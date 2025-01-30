@@ -1,1 +1,1 @@
-||youtube.com^$jsonprune=prettyPrint
+||youtube.com^$xmlhttprequest,domain=youtube.com,jsonprune=adSlots;adPlacement
