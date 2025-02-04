@@ -1,49 +1,38 @@
-@@||hb.vntsm.com/v4/live/vms/sites/aternos.org/index.js$script,domain=aternos.org
-aternos.org##.header-center:style(margin-top:-5000px !important;)
-aternos.org##.sidebar:style(width: 1.745px !important; padding: 1px !important)
-aternos.org##.ad-dfp:style(min-height: 0.1485mm !important; height: 0.1485mm !important;)
-aternos.org###placement-takeover
-
-! https://www.reddit.com/r/uBlockOrigin/comments/16lmeri/youtube_antiadblock_and_ads_september_18_2023/k1wl8df/
-!#if !env_mv3
-!#if !cap_html_filtering
-!#if env_firefox
-youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots legacyImportant)
-!#endif
-!#endif
-!#endif
+! ✅ Block YouTube Ads (Desktop + Mobile)
 ||googlevideo.com/videoplayback*&ctier=L&*%2Cctier%2C$xhr,3p,domain=m.youtube.com|music.youtube.com|www.youtube.com
-www.youtube.com##+js(trusted-rpnt, script, (function serverContract(), /*START*/"YOUTUBE_PREMIUM_LOGO"!==ytInitialData?.topbar?.desktopTopbarRenderer?.logo?.topbarLogoRenderer?.iconImage?.iconType&&(location.href.startsWith("https://www.youtube.com/tv#/")||location.href.startsWith("https://www.youtube.com/embed/")||document.addEventListener("DOMContentLoaded"\,(function(){const t=()=>{const t=document.getElementById("movie_player");if(!t)return;if(!t.getStatsForNerds?.()?.debug_info?.startsWith?.("SSAP\, AD"))return;const e=t.getProgressState?.();e&&e.duration>0&&(e.loaded<e.duration||e.duration-e.current>1)&&t.seekTo?.(e.duration)};t()\,new MutationObserver((()=>{t()})).observe(document\,{childList:!0\,subtree:!0})})));(function serverContract(), sedCount, 1)
-www.youtube.com##+js(nano-stb, [native code], 17000, 0.001)
-!#if cap_html_filtering
-||www.youtube.com/s/player/*/base.js$script,xhr,replace=/if\(e===""\)/if(0)/
-!#endif
-! https://www.reddit.com/r/uBlockOrigin/comments/1ebwr6c/is_ublock_broken_again_or_am_i_doing_something/
-!www.youtube.com##+js(json-prune-fetch-response, playerAds adPlacements adSlots playerResponse.playerAds playerResponse.adPlacements playerResponse.adSlots [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots, , propsToMatch, /\/(?:player|playlist|get_watch)\?/)
-www.youtube.com##+js(json-prune-fetch-response, playerAds adPlacements adSlots no_ads playerResponse.playerAds playerResponse.adPlacements playerResponse.adSlots playerResponse.no_ads [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots [].playerResponse.no_ads, , propsToMatch, /\/(player|get_watch)\?/)
-! https://github.com/uBlockOrigin/uAssets/issues/20586#issuecomment-2144781835
-www.youtube.com##+js(json-prune-fetch-response, playerAds adPlacements adSlots no_ads playerResponse.playerAds playerResponse.adPlacements playerResponse.adSlots playerResponse.no_ads, , propsToMatch, /playlist?)
-! https://github.com/uBlockOrigin/uAssets/issues/20586#issuecomment-2271325338
-! https://github.com/uBlockOrigin/uAssets/issues/20586#issuecomment-2308486423
-! https://github.com/AdguardTeam/AdguardFilters/commit/61d89cebe154ca17932bedf61df5e2c7bd75bd7d
-!tv.youtube.com#@#+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /playlist\?list=|player\?|watch\?[tv]=|youtubei\/v1\/player/)
-www.youtube.com##+js(json-prune-xhr-response, playerAds adPlacements adSlots no_ads playerResponse.playerAds playerResponse.adPlacements playerResponse.adSlots playerResponse.no_ads [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots [].playerResponse.no_ads, , propsToMatch, /\/player(?:\?.+)?$/)
-tv.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /playlist\?list=|\/player(?:\?.+)?$|watch\?[tv]=/)
-!#if !cap_html_filtering
-www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,/, , player?)
-www.youtube.com#@#+js(trusted-replace-fetch-response, /"adSlots.*?\}\}\]\,"adBreakHeartbeatParams/, "adBreakHeartbeatParams, player?)
-www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,/, , /playlist\?list=|\/player(?:\?.+)?$|watch\?[tv]=/)
-www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?("adSlots"|"adBreakHeartbeatParams")/gms, $1, /\/player(?:\?.+)?$/)
-www.youtube.com##+js(trusted-replace-fetch-response, '"adPlacements"', '"no_ads"', player?)
-www.youtube.com##+js(trusted-replace-fetch-response, '"adSlots"', '"no_ads"', player?)
-!#else
-||www.youtube.com/playlist?list=$xhr,1p,replace=/"adPlacements"/"no_ads"/
-||www.youtube.com/playlist?list=$xhr,1p,replace=/"adSlots"/"no_ads"/
-||www.youtube.com/watch?$xhr,1p,replace=/"adPlacements"/"no_ads"/
-||www.youtube.com/watch?$xhr,1p,replace=/"adSlots"/"no_ads"/
+||youtube.com/api/stats/ads$xhr,3p
+||m.youtube.com/api/stats/ads$xhr,3p
+||youtube.com/get_midroll_info$xhr,3p
+||m.youtube.com/get_midroll_info$xhr,3p
+||youtube.com/pagead/$xhr,3p
+||m.youtube.com/pagead/$xhr,3p
+||youtube.com/ptracking$xhr,3p
+||m.youtube.com/ptracking$xhr,3p
+||youtube.com/gen_204?atf=$xhr,3p
+||m.youtube.com/gen_204?atf=$xhr,3p
+||youtube.com/watch_fragments_ajax?*&ad3=1$xhr,3p
+||m.youtube.com/watch_fragments_ajax?*&ad3=1$xhr,3p
 ||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"adPlacements"/"no_ads"/
-||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"adSlots"/"no_ads"/
-||youtube.com/youtubei/v1/get_watch?$xhr,1p,replace=/"adPlacements"/"no_ads"/
-||youtube.com/youtubei/v1/get_watch?$xhr,1p,replace=/"adSlots"/"no_ads"/
-!#endif
-www.youtube.com##+js(trusted-prevent-dom-bypass, Node.prototype.appendChild, fetch)
+||m.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"adPlacements"/"no_ads"/
+||www.youtube.com/youtubei/v1/get_watch?$xhr,1p,replace=/"adPlacements"/"no_ads"/
+||m.youtube.com/youtubei/v1/get_watch?$xhr,1p,replace=/"adPlacements"/"no_ads"/
+||www.youtube.com/playlist?list=$xhr,1p,replace=/"adPlacements"/"no_ads"/
+||m.youtube.com/playlist?list=$xhr,1p,replace=/"adPlacements"/"no_ads"/
+
+! ✅ Block Ad Elements (HTML-based Ads)
+youtube.com##.ytp-ad-module
+m.youtube.com##.ytp-ad-module
+youtube.com##.ytp-ad-player-overlay
+m.youtube.com##.ytp-ad-player-overlay
+youtube.com##.ytp-ad-text
+m.youtube.com##.ytp-ad-text
+youtube.com##.ad-showing
+m.youtube.com##.ad-showing
+youtube.com##.ytp-ad-overlay-container
+m.youtube.com##.ytp-ad-overlay-container
+
+! ✅ Replace "adBreakHeartbeatParams" with "no_ads"
+www.youtube.com##+js(trusted-replace-xhr-response, '"adBreakHeartbeatParams"', '"no_ads"', /playlist\?list=|\/player(?:\?.+)?$|watch\?[tv]=/)
+m.youtube.com##+js(trusted-replace-xhr-response, '"adBreakHeartbeatParams"', '"no_ads"', /playlist\?list=|\/player(?:\?.+)?$|watch\?[tv]=/)
+www.youtube.com##+js(trusted-replace-fetch-response, '"adBreakHeartbeatParams"', '"no_ads"', player?)
+m.youtube.com##+js(trusted-replace-fetch-response, '"adBreakHeartbeatParams"', '"no_ads"', player?)
