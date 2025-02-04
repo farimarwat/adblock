@@ -1,38 +1,25 @@
-! ✅ Block YouTube Ads (Desktop + Mobile)
-||googlevideo.com/videoplayback*&ctier=L&*%2Cctier%2C$xhr,3p,domain=m.youtube.com|music.youtube.com|www.youtube.com
-||youtube.com/api/stats/ads$xhr,3p
-||m.youtube.com/api/stats/ads$xhr,3p
-||youtube.com/get_midroll_info$xhr,3p
-||m.youtube.com/get_midroll_info$xhr,3p
-||youtube.com/pagead/$xhr,3p
-||m.youtube.com/pagead/$xhr,3p
-||youtube.com/ptracking$xhr,3p
-||m.youtube.com/ptracking$xhr,3p
-||youtube.com/gen_204?atf=$xhr,3p
-||m.youtube.com/gen_204?atf=$xhr,3p
-||youtube.com/watch_fragments_ajax?*&ad3=1$xhr,3p
-||m.youtube.com/watch_fragments_ajax?*&ad3=1$xhr,3p
-||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"adPlacements"/"no_ads"/
-||m.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"adPlacements"/"no_ads"/
-||www.youtube.com/youtubei/v1/get_watch?$xhr,1p,replace=/"adPlacements"/"no_ads"/
-||m.youtube.com/youtubei/v1/get_watch?$xhr,1p,replace=/"adPlacements"/"no_ads"/
-||www.youtube.com/playlist?list=$xhr,1p,replace=/"adPlacements"/"no_ads"/
-||m.youtube.com/playlist?list=$xhr,1p,replace=/"adPlacements"/"no_ads"/
+! --- JSON Pruning: Remove Ad Elements from YouTube API Responses ---
+www.youtube.com##+js(json-prune-fetch-response, playerAds adPlacements adSlots playerResponse.playerAds playerResponse.adPlacements playerResponse.adSlots [], , propsToMatch, /\/(player|get_watch|playlist)\?/)
+m.youtube.com##+js(json-prune-fetch-response, playerAds adPlacements adSlots playerResponse.playerAds playerResponse.adPlacements playerResponse.adSlots [], , propsToMatch, /\/(player|get_watch|playlist)\?/)
 
-! ✅ Block Ad Elements (HTML-based Ads)
-youtube.com##.ytp-ad-module
-m.youtube.com##.ytp-ad-module
-youtube.com##.ytp-ad-player-overlay
-m.youtube.com##.ytp-ad-player-overlay
-youtube.com##.ytp-ad-text
-m.youtube.com##.ytp-ad-text
-youtube.com##.ad-showing
-m.youtube.com##.ad-showing
-youtube.com##.ytp-ad-overlay-container
-m.youtube.com##.ytp-ad-overlay-container
+! --- Replace YouTube Ad Parameters with "no_ads" ---
+www.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /\/(player|get_watch|playlist)\?/)
+www.youtube.com##+js(trusted-replace-xhr-response, '"adSlots"', '"no_ads"', /\/(player|get_watch|playlist)\?/)
+www.youtube.com##+js(trusted-replace-xhr-response, '"playerAds"', '"no_ads"', /\/(player|get_watch|playlist)\?/)
+www.youtube.com##+js(trusted-replace-xhr-response, '"adBreakHeartbeatParams"', '"no_ads"', /\/(player|get_watch|playlist)\?/)
 
-! ✅ Replace "adBreakHeartbeatParams" with "no_ads"
-www.youtube.com##+js(trusted-replace-xhr-response, '"adBreakHeartbeatParams"', '"no_ads"', /playlist\?list=|\/player(?:\?.+)?$|watch\?[tv]=/)
-m.youtube.com##+js(trusted-replace-xhr-response, '"adBreakHeartbeatParams"', '"no_ads"', /playlist\?list=|\/player(?:\?.+)?$|watch\?[tv]=/)
+m.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /\/(player|get_watch|playlist)\?/)
+m.youtube.com##+js(trusted-replace-xhr-response, '"adSlots"', '"no_ads"', /\/(player|get_watch|playlist)\?/)
+m.youtube.com##+js(trusted-replace-xhr-response, '"playerAds"', '"no_ads"', /\/(player|get_watch|playlist)\?/)
+m.youtube.com##+js(trusted-replace-xhr-response, '"adBreakHeartbeatParams"', '"no_ads"', /\/(player|get_watch|playlist)\?/)
+
+! --- Also Modify Fetch Responses to Remove Ad Elements ---
+www.youtube.com##+js(trusted-replace-fetch-response, '"adPlacements"', '"no_ads"', player?)
+www.youtube.com##+js(trusted-replace-fetch-response, '"adSlots"', '"no_ads"', player?)
+www.youtube.com##+js(trusted-replace-fetch-response, '"playerAds"', '"no_ads"', player?)
 www.youtube.com##+js(trusted-replace-fetch-response, '"adBreakHeartbeatParams"', '"no_ads"', player?)
+
+m.youtube.com##+js(trusted-replace-fetch-response, '"adPlacements"', '"no_ads"', player?)
+m.youtube.com##+js(trusted-replace-fetch-response, '"adSlots"', '"no_ads"', player?)
+m.youtube.com##+js(trusted-replace-fetch-response, '"playerAds"', '"no_ads"', player?)
 m.youtube.com##+js(trusted-replace-fetch-response, '"adBreakHeartbeatParams"', '"no_ads"', player?)
